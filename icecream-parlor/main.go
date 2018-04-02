@@ -96,6 +96,9 @@ func (t *Trip) findOptimizedCost() (int, int) {
 	for i, j := 0, len(costs)-1; i < j; {
 		sum := costs[i].value + costs[j].value
 		if sum == t.MoneyPooled {
+			if costs[i].index > costs[j].index {
+				return costs[j].index, costs[i].index
+			}
 			return costs[i].index, costs[j].index
 		} else if sum > t.MoneyPooled {
 			j--
